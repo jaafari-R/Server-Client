@@ -41,13 +41,11 @@ public:
     int start();
 
 private:
-    //TODO
-    /*  Called when an error occurs
+    /*  Receives an error prints & returns it
     */
     ServerError error(ServerError err);
 
-    //TODO
-    /*  Print Error Message
+    /*  Print error message
     */
     void printError(ServerError err);
 
