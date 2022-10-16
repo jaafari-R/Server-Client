@@ -8,7 +8,8 @@
 class Buffer
 {
 public:
-    /*  Initializes the buffer according to the provided size
+    /*  Initializes the buffer according to the provided size +1
+    /*  the extra 1 in size is always set to '\0'
     /*  If the size is less than 0, buffer_size is set to 0, 
     /*   and a Warning is printed.
     */
@@ -17,9 +18,9 @@ public:
     */
     ~Buffer();
 
-    /* TODO 
+    /* returns a String that contains the buffer's content
     */
-    void read();
+    std::string read();
 
     /* clears the buffer and writes new text to it
     */

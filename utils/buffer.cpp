@@ -15,6 +15,7 @@ Buffer::Buffer(int size)
     {
         this->buff_size = size;
     }
+    ++size; // the '\0' byte at the end
     this->buff = (char*) calloc(size, sizeof(char));
 }
 
@@ -24,13 +25,18 @@ Buffer::~Buffer()
     this->buff = nullptr;
 }
 
+std::string Buffer::read()
+{
+    return std::string(this->buff);
+}
+
 void Buffer::write(std::string text)
 {
     size_t sz = text.size();
     this->clear();
 
-    if(sz > this->buff_size - 1)
-        sz = this->buff_size - 1;
+    if(sz > this->buff_size)
+        sz = this->buff_size;
 
     strncpy(this->buff, text.c_str(), sz);
     this->buff[sz] = 0;
