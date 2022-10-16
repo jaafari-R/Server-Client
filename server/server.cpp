@@ -10,13 +10,20 @@
 #include "server.h"
 
 const int Server::DEFAULT_PORT = 17284;
+const static int DEFAULT_BUFFER_SIZE = 1024;
 
-Server::Server(int port)
+Server::Server(int port, int buffer_size)
 {
+    // set port
     if(port < 0 && port > 65535) 
         this->port = this->DEFAULT_PORT;
     else
         this->port = port;
+    // set buffer size
+    if(buffer_size < 0)
+        this->buffer_size = DEFAULT_BUFFER_SIZE;
+    else
+        this->buffer_size = buffer_size;
 }
 
 Server::~Server(){}
@@ -82,6 +89,20 @@ void Server::beginSession(int connection_socket)
  
     // closing the connected socket
     close(connection_socket);
+}
+
+std::string Server::recieve(int sock, char buffer[])
+{
+    std::string payload;
+    
+    payload = read(sock, buffer, this->buffer_size);
+
+    return payload;
+}
+
+void respond()
+{
+
 }
 
 ServerError Server::error(ServerError err)

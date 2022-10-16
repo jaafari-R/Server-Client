@@ -29,7 +29,7 @@ class Server
 {
 public:
     // TODO
-    Server(int port = DEFAULT_PORT);
+    Server(int port = DEFAULT_PORT, int buffer_size = DEFAULT_BUFFER_SIZE);
     // TODO
     ~Server();
 
@@ -53,17 +53,20 @@ private:
     void beginSession(int connection_socket);
 
     //TODO
+    /*  Reads a request from a client
+    */
+    std::string recieve(int sock, char buffer[]);
+
+    //TODO
     /*  Sends a response to the client
     */
     void respond();
-
-    //TODO
-    /*  Reads a request from a client
-    */
-    void recieve();
     
     int port; // the port the server listens on.
     int server_fd; // socket file descriptor that receives and sends requests.
+    char* buffer;
+    int buffer_size;
+    const static int DEFAULT_BUFFER_SIZE;
     const static int DEFAULT_PORT;
 };
 
