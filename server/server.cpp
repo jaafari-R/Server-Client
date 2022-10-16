@@ -34,19 +34,13 @@ int Server::start()
     this->server_fd = socket(AF_INET, SOCK_STREAM, 0);
 
     if(this->server_fd < 0)
-    {
-        this->error(); // TODO add eror
-        return -1; // TODO return error code 
-    }
+        return this->error(SOCKET_FAILED_ERROR);
 
     // Set Server Socket to be reusable
     reusable = setsockopt(this->server_fd, SOL_SOCKET,  SO_REUSEADDR | SO_REUSEPORT, &reuse_val, sizeof(reuse_val));
 
     if(reusable)
-    {
-        this->error(); // TODO add eror
-        return -1; // TODO return error code 
-    }
+        this->error(SET_SOCK_OPTION_ERROR); // TODO add eror
 
     // Setup the socket address
     address.sin_family = AF_INET;
@@ -55,25 +49,16 @@ int Server::start()
 
     /* Bind Server Socket */
     if(bind(this->server_fd, (struct sockaddr*)&address, sizeof(address)) < 0)
-    {
-        this->error(); // TODO add eror
-        return -1; // TODO return error code 
-    }
+        this->error(SOCK_BIND_ERROR);
 
     /* Listen for Connections */
     if (listen(this->server_fd, 15) < 0)
-    {
-        this->error(); // TODO add eror
-        return -1; // TODO return error code 
-    }
+        this->error(SOCK_LISTEN_ERROR);
 
     /* Accept Connection */
     connection_socket = accept(this->server_fd, (struct sockaddr*)&address, (socklen_t*)&addrlen);
     if (connection_socket < 0)
-    {
-        this->error(); // TODO add eror
-        return -1; // TODO return error code 
-    }
+        this->error(SOCK_ACCEPT_ERROR); // TODO add eror
     
     this->beginSession(connection_socket);
 
@@ -101,11 +86,11 @@ void Server::beginSession(int connection_socket)
 
 ServerError Server::error(ServerError err)
 {
-    switch(err)
-    {
-    default:
-        std::cerr << "An Unknown Error Error!";
-        break;
-    }
+    this->printError(err);
     return err;
+}
+
+void Server::printError(ServerError err)
+{
+    std::cerr << ERROR_MESSAGES[static_cast<int>(err)] << std::endl;
 }

@@ -3,7 +3,23 @@
 
 enum ServerError
 {
-
+    NO_ERROR = 0,
+    UNKNOWN_ERROR,
+    SOCKET_FAILED_ERROR,
+    SET_SOCK_OPTION_ERROR,
+    SOCK_BIND_ERROR,
+    SOCK_LISTEN_ERROR,
+    SOCK_ACCEPT_ERROR,
+};
+const char* ERROR_MESSAGES[] = 
+{
+    "", // NO_ERROR
+    "An Unknown Error Has Occured!", // UNKNOWN_ERROR
+    "", // SOCKET_FAILED_ERROR
+    "", // SET_SOCK_OPTION_ERROR
+    "", // SOCK_BIND_ERROR
+    "", // SOCK_LISTEN_ERROR
+    "", // SOCK_ACCEPT_ERROR
 };
 
 /*
@@ -29,6 +45,11 @@ private:
     /*  Called when an error occurs
     */
     ServerError error(ServerError err);
+
+    //TODO
+    /*  Print Error Message
+    */
+    void printError(ServerError err);
 
     //TODO
     void beginSession(int connection_socket);
