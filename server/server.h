@@ -12,6 +12,7 @@ enum ServerError
     SOCK_LISTEN_ERROR,
     SOCK_ACCEPT_ERROR,
 };
+// TODO add all Error Messages
 const static char* SERVER_ERROR_MESSAGES[] = 
 {
     "", // NO_ERROR
