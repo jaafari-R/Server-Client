@@ -52,13 +52,18 @@ private:
     //TODO
     void beginSession(int connection_socket);
 
-    /* sock is the connections socket with the client*/
+    /* reads a clients request and returns a response message
+    /* It returns to the client the same message that was received
+    */
+    std::string handleRequest(std::string& request);
+
+    /* sock is the connections socket with the client */
     /*  Reads a request received from a client
     */
     std::string recieve(int sock, Buffer& buffer);
     /*  Sends a response to a requesting client
     */
-    void respond(int sock, std::string response);
+    void respond(int sock, std::string& response);
     
     int port; // the port the server listens on.
     int server_fd; // socket file descriptor that receives and sends requests.

@@ -26,7 +26,7 @@ public:
 
     /* clears the buffer and writes new text to it
     */
-    void write(std::string text);
+    void write(std::string& text);
     
     /* Sets all values in the buffer to 0
     */

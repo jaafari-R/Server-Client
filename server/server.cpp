@@ -84,7 +84,7 @@ void Server::beginSession(int connection_socket)
     std::string response; // response to the requester
 
     request = this->recieve(connection_socket, buffer);
-
+    response = this->handleRequest(request);
     this->respond(connection_socket, response);
 
     // closing the connected socket
@@ -102,7 +102,7 @@ std::string Server::recieve(int sock, Buffer& buffer)
     return buffer.read();
 }
 
-void respond(int sock, std::string response)
+void respond(int sock, std::string& response)
 {
     int send_val;
     Buffer response_buffer(response.size());
@@ -112,6 +112,12 @@ void respond(int sock, std::string response)
 
     /* TODO add send_val check for erros & other information */
 }
+
+std::string handleRequest(std::string& request)
+{
+    return request;
+}
+
 
 ServerError Server::error(ServerError err)
 {

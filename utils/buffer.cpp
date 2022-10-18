@@ -30,7 +30,7 @@ std::string Buffer::read()
     return std::string(this->buff);
 }
 
-void Buffer::write(std::string text)
+void Buffer::write(std::string& text)
 {
     size_t sz = text.size();
     this->clear();
