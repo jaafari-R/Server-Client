@@ -1,5 +1,6 @@
 #ifndef __SERVER__
 #define __SERVER__
+#include "../utils/buffer.h"
 
 enum ServerError
 {
@@ -11,7 +12,7 @@ enum ServerError
     SOCK_LISTEN_ERROR,
     SOCK_ACCEPT_ERROR,
 };
-const char* ERROR_MESSAGES[] = 
+const static char* SERVER_ERROR_MESSAGES[] = 
 {
     "", // NO_ERROR
     "An Unknown Error Has Occured!", // UNKNOWN_ERROR

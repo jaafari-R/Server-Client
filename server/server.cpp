@@ -8,10 +8,9 @@
 #include <iostream>
 
 #include "server.h"
-#include "../utils/buffer.h"
 
 const int Server::DEFAULT_PORT = 17284;
-const static int DEFAULT_BUFFER_SIZE = 1024;
+const int Server::DEFAULT_BUFFER_SIZE = 1024;
 
 Server::Server(int port, int buffer_size)
 {
@@ -102,7 +101,7 @@ std::string Server::recieve(int sock, Buffer& buffer)
     return buffer.read();
 }
 
-void respond(int sock, std::string& response)
+void Server::respond(int sock, std::string& response)
 {
     int send_val;
     Buffer response_buffer(response.size());
@@ -113,7 +112,7 @@ void respond(int sock, std::string& response)
     /* TODO add send_val check for erros & other information */
 }
 
-std::string handleRequest(std::string& request)
+std::string Server::handleRequest(std::string& request)
 {
     return request;
 }
@@ -127,5 +126,5 @@ ServerError Server::error(ServerError err)
 
 void Server::printError(ServerError err)
 {
-    std::cerr << ERROR_MESSAGES[static_cast<int>(err)] << std::endl;
+    std::cerr << SERVER_ERROR_MESSAGES[static_cast<int>(err)] << std::endl;
 }
