@@ -54,7 +54,7 @@ private:
     void beginSession(int connection_socket);
 
     /* reads a clients request and returns a response message
-    /* It returns to the client the same message that was received
+    /* It prints the request & returns to the client the same request message received
     */
     std::string handleRequest(std::string& request);
 
