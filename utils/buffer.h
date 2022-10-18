@@ -14,6 +14,8 @@ public:
     /*   and a Warning is printed.
     */
     Buffer(int size);
+    /* TODO add string Constructor
+    */
     /*  Frees/Cleans the buffer
     */
     ~Buffer();

@@ -52,20 +52,17 @@ private:
     //TODO
     void beginSession(int connection_socket);
 
-    //TODO
-    /*  Reads a request from a client
+    /* sock is the connections socket with the client*/
+    /*  Reads a request received from a client
     */
-    std::string recieve(int sock, char buffer[]);
-
-    //TODO
-    /*  Sends a response to the client
+    std::string recieve(int sock, Buffer& buffer);
+    /*  Sends a response to a requesting client
     */
-    void respond();
+    void respond(int sock, std::string response);
     
     int port; // the port the server listens on.
     int server_fd; // socket file descriptor that receives and sends requests.
-    char* buffer;
-    int buffer_size;
+    int buffer_size; // server received request buffer size
     const static int DEFAULT_BUFFER_SIZE;
     const static int DEFAULT_PORT;
 };

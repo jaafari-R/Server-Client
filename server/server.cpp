@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "server.h"
+#include "../utils/buffer.h"
 
 const int Server::DEFAULT_PORT = 17284;
 const static int DEFAULT_BUFFER_SIZE = 1024;
@@ -78,31 +79,38 @@ int Server::start()
 
 void Server::beginSession(int connection_socket)
 {
-    int valread;
-    char buffer[1024] = {0};
-    const char* response = "This is a response!";
+    Buffer buffer(this->buffer_size);
+    std::string request;  // received request
+    std::string response; // response to the requester
 
-    valread = read(connection_socket, buffer, 1024);
-    printf("%s\n", buffer);
-    send(connection_socket, response, strlen(response), 0);
-    printf("Hello message sent\n");
- 
+    request = this->recieve(connection_socket, buffer);
+
+    this->respond(connection_socket, response);
+
     // closing the connected socket
     close(connection_socket);
 }
 
-std::string Server::recieve(int sock, char buffer[])
+std::string Server::recieve(int sock, Buffer& buffer)
 {
-    std::string payload;
+    int read_val; // number of bytes read from the socket
     
-    payload = read(sock, buffer, this->buffer_size);
+    read_val = read(sock, buffer.getBuffer(), buffer.getSize());
 
-    return payload;
+    /* TODO add read_val check for errors & other information */
+
+    return buffer.read();
 }
 
-void respond()
+void respond(int sock, std::string response)
 {
+    int send_val;
+    Buffer response_buffer(response.size());
+    response_buffer.write(response);
 
+    send_val = send(sock, response_buffer.getBuffer(), response_buffer.getSize(), 0);
+
+    /* TODO add send_val check for erros & other information */
 }
 
 ServerError Server::error(ServerError err)
