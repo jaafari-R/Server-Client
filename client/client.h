@@ -15,7 +15,7 @@ const static char* CLIENT_ERROR_MESSAGES[] =
     "", // NO_ERROR
     "An unknown error has occured!", // UNKNOWN_ERROR
     "An error has occured while creating the socket!", // SOCKET_FAILED_ERROR
-    "The server ip address is invalid!",// INVALID_ADDRESS
+    "Invalid server ip address format!",// INVALID_ADDRESS
     "An error has occured while trying to connect to the server!"// CONNECTION_FAILED
 };
 
