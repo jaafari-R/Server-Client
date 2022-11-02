@@ -21,7 +21,7 @@ Server::Server(int port, int buffer_size)
         this->port = port;
     // set buffer size
     if(buffer_size < 0)
-        this->buffer_size = DEFAULT_BUFFER_SIZE;
+        this->buffer_size = this->DEFAULT_BUFFER_SIZE;
     else
         this->buffer_size = buffer_size;
 }
@@ -70,7 +70,7 @@ int Server::start()
     this->beginSession(connection_socket);
 
     /* Close Server */
-    shutdown(server_fd, SHUT_RDWR);
+    shutdown(this->server_fd, SHUT_RDWR);
 
     return 0; // TODO add error code for return
 }
@@ -119,13 +119,14 @@ std::string Server::handleRequest(std::string& request)
 }
 
 
-ServerError Server::error(ServerError err)
+ErrorServer Server::error(ErrorServer err)
 {
     this->printError(err);
     return err;
 }
 
-void Server::printError(ServerError err)
+void Server::printError(ErrorServer err)
 {
-    std::cerr << SERVER_ERROR_MESSAGES[static_cast<int>(err)] << std::endl;
+    if(err != NO_ERROR)
+        std::cerr << SERVER_ERROR_MESSAGES[static_cast<int>(err)] << std::endl;
 }

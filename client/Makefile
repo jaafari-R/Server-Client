@@ -1,2 +1,2 @@
 main:
-	g++ client.cpp main.cpp -o client
+	g++ client.cpp main.cpp ../utils/buffer.cpp -o client

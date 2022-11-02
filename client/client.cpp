@@ -90,7 +90,7 @@ std::string Client::recieve(Buffer& buffer)
 {
     int read_val; // number of bytes read from the socket
     
-    read_val = read(sock, buffer.getBuffer(), buffer.getSize());
+    read_val = read(this->sock, buffer.getBuffer(), buffer.getSize());
 
     /* TODO add read_val check for errors & other information */
 
@@ -102,17 +102,14 @@ void Client::handleResponse(std::string response)
     std::cout << "Received from server: " << response << std::endl;
 }
 
+ErrorClient Client::error(ErrorClient err)
+{
+    this->printError(err);
+    return err;
+}
+
 void Client::printError(ErrorClient err)
 {
-    switch(err)
-    {
-        case NO_ERROR:
-            break;
-        case CREATION_ERROR:
-            break;
-        case INVALID_ADDRESS:
-            break;
-        case CONNECTION_FAILED:
-            break;
-    }
+    if(err != NO_ERROR)
+        std::cerr << CLIENT_ERROR_MESSAGES[static_cast<int>(err)] << std::endl;
 }

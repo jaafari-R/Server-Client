@@ -52,10 +52,19 @@ public:
     */
     void handleResponse(std::string response);
 
-    /*  prints the error message related to the passed value
+private:
+    /*  prints error message & returns the error value
+    */
+    ErrorClient error(ErrorClient err);
+
+    /*  Print error message
     */
     void printError(ErrorClient err);
-private:
+
+    /* Exchange communication's encryption keys
+    */
+    void encryptionHandshake();
+
     int fd; // client file descriptor
     int sock; // client socket
     int port;

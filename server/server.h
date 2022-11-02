@@ -2,7 +2,7 @@
 #define __SERVER__
 #include "../utils/buffer.h"
 
-enum ServerError
+enum ErrorServer
 {
     NO_ERROR = 0,
     UNKNOWN_ERROR,
@@ -42,13 +42,13 @@ public:
     int start();
 
 private:
-    /*  Receives an error prints & returns it
+    /*  prints error message & returns the error value
     */
-    ServerError error(ServerError err);
+    ErrorServer error(ErrorServer err);
 
     /*  Print error message
     */
-    void printError(ServerError err);
+    void printError(ErrorServer err);
 
     //TODO
     void beginSession(int connection_socket);
@@ -65,6 +65,10 @@ private:
     /*  Sends a response to a requesting client
     */
     void respond(int sock, std::string& response);
+
+    /* Exchange communication's encryption keys
+    */
+    void encryptionHandshake();
     
     int port; // the port the server listens on.
     int server_fd; // socket file descriptor that receives and sends requests.
