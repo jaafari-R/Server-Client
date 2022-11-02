@@ -5,10 +5,20 @@
 enum ErrorClient
 {
     NO_ERROR,
-    CREATION_ERROR,
+    UNKNOWN_ERROR,
+    SOCKET_FAILED_ERROR,
     INVALID_ADDRESS,
     CONNECTION_FAILED
 };
+const static char* CLIENT_ERROR_MESSAGES[] = 
+{
+    "", // NO_ERROR
+    "An unknown error has occured!", // UNKNOWN_ERROR
+    "An error has occured while creating the socket!", // SOCKET_FAILED_ERROR
+    "The server ip address is invalid!",// INVALID_ADDRESS
+    "An error has occured while trying to connect to the server!"// CONNECTION_FAILED
+};
+
 
 class Client
 {

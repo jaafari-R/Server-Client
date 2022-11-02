@@ -36,7 +36,7 @@ ErrorClient Client::initConnection()
     if(this->sock < 0)
     {
         // socket creation error
-        return CREATION_ERROR;
+        return SOCKET_FAILED_ERROR;
     }
     
     server_addr.sin_family = AF_INET;
