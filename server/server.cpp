@@ -114,7 +114,7 @@ void Server::respond(int sock, std::string& response)
 
 std::string Server::handleRequest(std::string& request)
 {
-    std::cout << request << std::endl;
+    std::cout << "Received from client: " << request << std::endl;
     return request;
 }
 

@@ -16,12 +16,12 @@ enum ServerError
 const static char* SERVER_ERROR_MESSAGES[] = 
 {
     "", // NO_ERROR
-    "An Unknown Error Has Occured!", // UNKNOWN_ERROR
-    "", // SOCKET_FAILED_ERROR
-    "", // SET_SOCK_OPTION_ERROR
-    "", // SOCK_BIND_ERROR
-    "", // SOCK_LISTEN_ERROR
-    "", // SOCK_ACCEPT_ERROR
+    "An unknown error has occured!", // UNKNOWN_ERROR
+    "An error has occured while creating the socket!", // SOCKET_FAILED_ERROR
+    "An error has occured while setting the socket options!", // SET_SOCK_OPTION_ERROR
+    "An error has occured while trying to bind the socket!", // SOCK_BIND_ERROR
+    "An error has occured while listening for a client!", // SOCK_LISTEN_ERROR
+    "An error has occured while accepting a client!", // SOCK_ACCEPT_ERROR
 };
 
 /*
